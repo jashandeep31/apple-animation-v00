@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: calc(100vh + 1157px);
+        }
+        img {
+            position: fixed;
+        }
+        h1 {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            width: 100%;
+            font-size: 100px;
+            font-weight: bolder;
+        }
+        img {
+            /* opacity: 0.5; */
+        }
+    </style>
+    <body>
+        <img id="Image" src="./images/a_00000.jpg" alt="" width="100%" />
+        <h1 id="main">Macbook AIR</h1>
+        <script>
+            const image = document.getElementById("Image");
+            const h1 = document.getElementById("main");
+            // image.src = "http://127.0.0.1:5500/images/a_00156.jpg";
+            let stringweadd = "";
+            let newlink = "";
+            const callme = () => {
+                let i = "00000";
+                for (let j = 0; j < 156; j++) {
+                    task(j);
+                }
+                function task(j) {
+                    setTimeout(function () {
+                        stringweadd = j.toString();
+                        i = i.slice(0, -stringweadd.length) + stringweadd;
+                        newlink =
+                            "http://127.0.0.1:5500/images/a_" + i + ".jpg";
+                        image.src = newlink;
+                        if (j == 155) {
+                            return callmeagain();
+                        }
+                    }, 33 * j);
+                }
+            };
+            const callmeagain = () => {
+                // callme();
+            };
+            callmeagain();
+            let i = "";
+            let j = "00000";
+            window.onscroll = function () {
+                j = "00000";
+                let i = window.scrollY / 5;
+                i = Math.round(i).toString();
+                j = j.slice(0, -i.length) + i;
+                if (Number(j) < 156) {
+                    newlink = "http://127.0.0.1:5500/images/a_" + j + ".jpg";
+                    image.src = newlink;
+                    // h1.style.letterSpacing = Math.round(Number(j) / 10) + "px";
+                    h1.style.fontSize = 100 + Math.round(Number(j) / 2) + "px";
+                }
+            };
+        </script>
+    </body>
+</html>
